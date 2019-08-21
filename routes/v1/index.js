@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var attractionRoute = require("./attraction.route");
 var categoryRoute = require("./category.route");
+var userRoute = require("./user.route");
 const jwt = require("jsonwebtoken");
 var passport = require("passport");
 var jwtConfig = require("../../config/jwt.config");
@@ -111,5 +112,6 @@ router.use("/forgotPassword", async (req, res, next) => {
 /* GET home page. */
 router.use("/attraction", attractionRoute);
 router.use("/category", categoryRoute);
+router.use("/user", userRoute);
 
 module.exports = router;

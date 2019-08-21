@@ -25,7 +25,9 @@ module.exports = (sequelize, SequelizeDataTypes) => {
       foreignKey: "creator_id",
       targetKey: "id"
     });
-    models.Tour.hasMany(models.TourAttraction, {});
+    models.Tour.hasMany(models.TourAttraction, {
+      foreignKey: "tour_id"
+    });
   };
 
   return Tour;

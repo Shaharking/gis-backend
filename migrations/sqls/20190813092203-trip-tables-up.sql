@@ -2,7 +2,7 @@
 
 CREATE TABLE tours
 (
-    id int PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
     date_from DATE,
     date_to DATE,
     creator_id int not null REFERENCES users(id)

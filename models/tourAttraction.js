@@ -35,5 +35,5 @@ module.exports = (sequelize, SequelizeDataTypes) => {
     });
   };
 
-  return Tour;
+  return TourAttraction;
 };
