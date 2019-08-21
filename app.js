@@ -27,4 +27,10 @@ app.use(flash());
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
+app.use(function(err, req, res, next) {
+  let statusCode = err.status ? err.status : 500;
+  let message = err.message ? err.message : "Something broke!";
+  res.status(statusCode).send(message);
+});
+
 module.exports = app;
