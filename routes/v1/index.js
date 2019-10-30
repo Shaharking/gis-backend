@@ -3,6 +3,7 @@ var router = express.Router();
 var attractionRoute = require("./attraction.route");
 var categoryRoute = require("./category.route");
 var userRoute = require("./user.route");
+var tripOfferRoute = require("./tripOffer.route");
 const jwt = require("jsonwebtoken");
 var passport = require("passport");
 var jwtConfig = require("../../config/jwt.config");
@@ -29,7 +30,11 @@ router.post("/register", function(req, res, next) {
         const { id } = user;
         // generate a signed son web token with the contents of user object and return it in the response
         const token = jwt.sign({ id }, jwtConfig.jwt);
-        return res.json({ token, email: user.email });
+        return res.json({
+          token,
+          email: user.email,
+          user_type: user.user_type
+        });
       });
     }
   )(req, res);
@@ -53,7 +58,11 @@ router.post("/login", function(req, res, next) {
         const { id } = user;
         // generate a signed son web token with the contents of user object and return it in the response
         const token = jwt.sign({ id }, jwtConfig.jwt);
-        return res.json({ token, email: user.email });
+        return res.json({
+          token,
+          email: user.email,
+          user_type: user.user_type
+        });
       });
     }
   )(req, res);
@@ -113,5 +122,6 @@ router.use("/forgotPassword", async (req, res, next) => {
 router.use("/attraction", attractionRoute);
 router.use("/category", categoryRoute);
 router.use("/user", userRoute);
+router.use("/tripOffers", tripOfferRoute);
 
 module.exports = router;
