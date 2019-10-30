@@ -28,6 +28,13 @@ module.exports = (sequelize, SequelizeDataTypes) => {
     models.Tour.hasMany(models.TourAttraction, {
       foreignKey: "tour_id"
     });
+    models.Tour.hasMany(models.TripOffers, {
+      foreignKey: "trip_id"
+    });
+    models.Tour.belongsTo(models.TripOrder, {
+      foreignKey: "id",
+      targetKey: "trip_id"
+    });
   };
 
   return Tour;

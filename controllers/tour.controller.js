@@ -7,12 +7,12 @@ const USER_TYPES = {
 
 async function getUserTours(req, res, next) {
   const user = res.locals.user;
+  const userId = res.locals.user.id;
   let tours;
   if (user.user_type === USER_TYPES.TOURIST) {
-    const userId = res.locals.user.id;
     tours = await tourHandler.getToursFromUser(userId);
   } else if (user.user_type === USER_TYPES.COMPANY) {
-    tours = await tourHandler.getAllOpenTours();
+    tours = await tourHandler.getAllOpenTours(userId);
   }
   res.send(tours);
 }
