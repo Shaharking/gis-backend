@@ -44,7 +44,18 @@ async function createTour(tour, tourAttractions) {
   }
 }
 
+async function getAllOpenTours() {
+  return models.Tour.findAll({
+    include: [
+      {
+        model: models.TourAttraction
+      }
+    ]
+  });
+}
+
 module.exports = {
   getToursFromUser,
-  createTour
+  createTour,
+  getAllOpenTours
 };

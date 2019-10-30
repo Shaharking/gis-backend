@@ -53,7 +53,10 @@ module.exports = function(passport) {
               message: "Logged In Successfully"
             });
           })
-          .catch(err => cb(err));
+          .catch(err => {
+            console.log(err);
+            cb(err);
+          });
       }
     )
   );
@@ -92,11 +95,11 @@ module.exports = function(passport) {
             // if there is no user with that email
             // create the user
             var newUser = new User();
-
+            const userType = req.body.userType;
             // set the user's local credentials
             newUser.email = email;
             newUser.password = password;
-
+            newUser.user_type = userType;
             // save the user
             try {
               await newUser.save();
