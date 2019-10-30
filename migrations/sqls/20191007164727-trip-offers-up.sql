@@ -14,3 +14,17 @@ ADD CONSTRAINT "ID_PKEY" PRIMARY KEY
 
 UPDATE users
 SET user_type = 1;
+
+CREATE TABLE trip_order
+(
+    trip_id int NOT NULL REFERENCES tours(id),
+    user_id int NOT NULL REFERENCES users(id),
+    cost float
+);
+
+CREATE TABLE trip_ignored
+(
+    trip_id int NOT NULL REFERENCES tours(id),
+    user_id int NOT NULL REFERENCES users(id)
+);
+

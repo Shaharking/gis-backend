@@ -1,10 +1,24 @@
 var models = require("../models/index");
+var Op = models.Sequelize.Op;
 
 async function getToursFromUser(userId) {
   return models.Tour.findAll({
     include: [
       {
         model: models.TourAttraction
+      },
+      {
+        model: models.TripOffers,
+        include: [
+          {
+            model: models.User,
+            attributes: ["email"]
+          }
+        ],
+        required:false
+      },
+      {
+        model: models.TripOrder
       }
     ],
     where: {
@@ -44,13 +58,27 @@ async function createTour(tour, tourAttractions) {
   }
 }
 
-async function getAllOpenTours() {
+async function getAllOpenTours(userId) {
   return models.Tour.findAll({
     include: [
       {
         model: models.TourAttraction
+      },
+      {
+        model: models.TripOffers,
+        where: {
+          user_id: userId
+        },
+        required:false
+      },
+      {
+        model: models.TripOrder,
+        required:false
       }
-    ]
+    ],
+    where: {
+      '$TripOrder.trip_id$': null
+    }
   });
 }
 

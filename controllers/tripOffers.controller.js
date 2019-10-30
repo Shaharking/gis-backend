@@ -7,4 +7,10 @@ async function createTripOffer(req, res, next) {
   res.send({});
 }
 
-module.exports = { createTripOffer };
+async function createTripOrder(req, res, next) {
+    const { tripId, userId } = req.body;
+    await tripOfferHandler.createTripOrder({ tripId, userId });
+    res.send({});
+}
+
+module.exports = { createTripOffer, createTripOrder };
